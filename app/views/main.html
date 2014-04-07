@@ -1,27 +1,51 @@
 <section class="list-box">
-  <header>
-    <h1>Contact List</h1>
+  <header class="header">
+    <button type="submit" class="btn btn-primary bt-bigger btn-add pull-right" ng-click="showContactForm()"> add <span class="glyphicon glyphicon-plus-sign"></span></button>
+    <h1 class="text-muted">Contact List</h1>
   </header>
-  <div class="search-box">
-    <input type="search" placeholder="Search contacts" ng-model="searchContact">
-    <button type="submit" class="btn btn-primary btn-add" ng-click="showContactForm()">add</button>
+
+  <div class="panel panel-default contactForm" ng-show="contactAction.show" escape="hideContactForm()">
+    <div class="panel-body">
+      <form class="form" role="form">
+        <div ng-class="validationError ? 'form-group has-error' : 'form-group'">
+          <label for="name"  class="control-label">Name:</label>
+        
+           <input type="text" class="form-control" placeholder="Name" ng-value="contactAction.contact ? contactAction.contact.name : ''" ng-model="contactAction.contact.name" ng-class="validationError ? 'error' : ''">
+        </div>
+        <div class="form-group">
+          <label for="name"  class="control-label">Phone:</label>
+        
+            <input type="text" class="form-control" placeholder="Phone number" ng-value="contactAction.contact ? contactAction.contact.phone : ''" ng-model="contactAction.contact.phone">
+          </div>
+        <div class="form-group">
+          <label for="name"  class="control-label">Address:</label>
+        
+            <input type="text" class="form-control" placeholder="Address" ng-value="contactAction.contact ? contactAction.contact.address : ''" ng-model="contactAction.contact.address">
+          </div>
+        
+        <div class="form-group">
+          <div class="pull-right">
+            <button type="button" ng-click="hideContactForm()" class="btn btn-default">Cancel</button>
+            <button type="button" ng-click="saveContact()" class="btn btn-success btn-save">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <ul class="contacts">
-    <li class="no-contact" ng-show="!contacts.length">
-      <p>Your contact list is empty. <a ng-click="showContactForm()">Add [+]</a></p>
+  <div class="search-box" ng-show="contacts.length>1">
+    <label class="sr-only" for="exampleInputEmail2">Search:</label>
+    <input type="search" class="form-control" placeholder="Search contacts" ng-model="searchContact">
+    <hr>
+  </div>
+  <ul class="list-group contacts">
+    <li class="no-contact list-group-item" ng-show="!contacts.length">
+      <p class="text-center">Your contact list is empty. <a href="" ng-click="showContactForm()">Add one <span class="glyphicon glyphicon-plus-sign"></span></a></p>
     </li> 
       <contact ng-repeat="contact in contacts | filter:searchContact track by $index">
   </ul>
 </section>
 
 
-<form class="contactForm" ng-show="contactAction.show" escape="hideContactForm()">
-   <h2>New contact</h2>
-   <label for="name"><input type="text" placeholder="Name" ng-value="contactAction.contact ? contactAction.contact.name : ''" ng-model="contactAction.contact.name" ng-class="validationError ? 'error' : ''"></label>
-   <label for="name"><input type="text" placeholder="Phone number" ng-value="contactAction.contact ? contactAction.contact.phone : ''" ng-model="contactAction.contact.phone"></label>
-   <label for="name"><input type="text" placeholder="Address" ng-value="contactAction.contact ? contactAction.contact.address : ''" ng-model="contactAction.contact.address"></label>
-   <button type="button" ng-click="saveContact()" class="btn btn-primary btn-save">Save</button>
-   <button type="button" ng-click="hideContactForm()" class="btn bordered">Cancel</button>
-</form>
+
 
   

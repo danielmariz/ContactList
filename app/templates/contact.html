@@ -1,7 +1,9 @@
-<li>
-	<strong>{{ contact.name }}</strong>
-	<strong>{{ contact.address }}</strong>
-	<strong>{{ contact.phone }}</strong>
-	<button type="button" class="btn btn-primary btn-edit" ng-click="showContactForm(contact)">edit</button>
-	<button type="button" class="btn btn-danger btn-delete" ng-click="deleteContact(contact)">delete</button>
+<li class="list-group-item">
+	<strong>Name:</strong> <span>{{ contact.name }}</span> | 
+	<strong>Address:</strong> {{ contact.address }} | 
+	<strong>Phone:</strong> {{ contact.phone }}
+	<div class="pull-right">
+		<button type="button" class="btn btn-xs btn-warning btn-edit" ng-click="showContactForm(contact)">edit <span class="glyphicon glyphicon-edit"></span> </button>
+		<button type="button" class="btn btn-xs btn-danger btn-delete" ng-click="deleteContact(contact)">delete <span class="glyphicon glyphicon-trash"></span></button>
+	</div>
 </li>

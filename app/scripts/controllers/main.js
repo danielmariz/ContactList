@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('contactListApp')
-	.controller('contactListCtrl', function ($scope, Localstorage) {
+	.controller('contactListCtrl', function ($scope, $location, $anchorScroll, Localstorage) {
 		 
 		
 		$scope.contacts = Localstorage.get();
@@ -14,11 +14,16 @@ angular.module('contactListApp')
 		$scope.showContactForm = function(contact){
 			$scope.contactAction.show = true;
 			$scope.contactAction.contact = contact || undefined;
+			// $location.hash('top');
+ 
+		    // call $anchorScroll()
+			// $anchorScroll();
 		};
 
 		$scope.hideContactForm = function(){
 			$scope.contactAction.show = false;
 			$scope.contactAction.contact = undefined;
+			$scope.validationError = false;
 			$scope.contacts = Localstorage.get();
 		};
 
@@ -42,7 +47,7 @@ angular.module('contactListApp')
 		};
 
 		function validate (contact){
-			return (contact.name === '') ? false : true;
+			return (!contact || contact.name === '') ? false : true;
 		}
 
 	});

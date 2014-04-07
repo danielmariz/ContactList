@@ -16,9 +16,11 @@ describe('Scenario: main', function() {
   it('should load index', function() {
     //Test
     expect(mainList.isDisplayed()).toBeTruthy();
-    expect(search.isDisplayed()).toBeTruthy();
     expect(contactsContainer.isDisplayed()).toBeTruthy();
+    expect(search.isPresent()).toBeTruthy();
+    expect(search.isDisplayed()).toBeFalsy();
     expect(contactForm.isPresent()).toBeTruthy();
+    expect(contactForm.isDisplayed()).toBeFalsy();
     expect(contactsContainer.element(by.css('.no-contact')).isDisplayed()).toBeTruthy();
   });
 
@@ -43,7 +45,7 @@ describe('Scenario: main', function() {
     element(by.css('.contacts li:first-child .btn-edit')).click();
     expect(contactForm.isDisplayed()).toBeTruthy();
     
-    var item = element(by.css('.contacts li:first-child strong:first-child'));
+    var item = element(by.css('.contacts li:first-child > span'));
 
     var nameInput = element(by.model('contactAction.contact.name'));
     nameInput.clear();
