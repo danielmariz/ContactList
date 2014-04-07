@@ -40,7 +40,11 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:jshint:test', 'karma', 'protractor']
+      },
+      e2eTest: {
+        files: ['test/scenarios/{,*/}*.js'],
+        tasks: ['protractor:run']    // The tasks to run when watched files changed
       },
       less: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
@@ -48,10 +52,7 @@ module.exports = function (grunt) {
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer'],
-        options: {
-          livereload: false
-        }
+        tasks: ['newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -77,6 +78,15 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/less/main.less'
         }
       }
+    },
+
+    protractor: {
+      options: {
+        configFile: "protractor.conf.js", // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false
+      },
+      run: {}
     },
 
     // The actual grunt server settings
@@ -360,6 +370,8 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-less');
+
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {

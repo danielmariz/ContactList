@@ -4,10 +4,10 @@
   </header>
   <div class="search-box">
     <input type="search" placeholder="Search contacts" ng-model="searchContact">
-    <button type="submit" class="btn btn-primary" ng-click="showContactForm()">add</button>
+    <button type="submit" class="btn btn-primary btn-add" ng-click="showContactForm()">add</button>
   </div>
   <ul class="contacts">
-    <li class="" ng-show="!contacts.length">
+    <li class="no-contact" ng-show="!contacts.length">
       <p>Your contact list is empty. <a ng-click="showContactForm()">Add [+]</a></p>
     </li> 
       <contact ng-repeat="contact in contacts | filter:searchContact track by $index">
@@ -15,12 +15,12 @@
 </section>
 
 
-<form class="" ng-show="contactAction.show" escape="hideContactForm()">
+<form class="contactForm" ng-show="contactAction.show" escape="hideContactForm()">
    <h2>New contact</h2>
    <label for="name"><input type="text" placeholder="Name" ng-value="contactAction.contact ? contactAction.contact.name : ''" ng-model="contactAction.contact.name" ng-class="validationError ? 'error' : ''"></label>
    <label for="name"><input type="text" placeholder="Phone number" ng-value="contactAction.contact ? contactAction.contact.phone : ''" ng-model="contactAction.contact.phone"></label>
    <label for="name"><input type="text" placeholder="Address" ng-value="contactAction.contact ? contactAction.contact.address : ''" ng-model="contactAction.contact.address"></label>
-   <button type="button" ng-click="saveContact()" class="btn btn-primary">Save</button>
+   <button type="button" ng-click="saveContact()" class="btn btn-primary btn-save">Save</button>
    <button type="button" ng-click="hideContactForm()" class="btn bordered">Cancel</button>
 </form>
 
